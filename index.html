@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<input id="search-text" placeholder="Search Notes">
+		<button id="remove-all">Remove Notes</button>
+		
+		<input id="for-fun" type="checkbox"> Check me for Fun.
+		
+		<br><br>
+		<form id="form">
+            <input id="input-note" placeholder="Add a Note!" name="formEntry">
+		</form>
+		
+		<select id="filter-by">
+			<option value="byEdited">
+				Sort by Last Edited
+			</option>
+			<option value="Alphabetically">
+				Sort Alphabetically
+			</option>
+			<option value="byCreated">
+				Sort by Recently Created
+			</option>
+		</select>
+		<div id="notes">
+			<br>
+		</div>
+		<script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+		<script src="notes-functions.js"></script>
+		<script src="notes.js"></script>
+	</body>
+</html>
