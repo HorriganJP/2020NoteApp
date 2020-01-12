@@ -4,7 +4,8 @@ saveNotes(notes);
 
 // BLANK FILTER VAR
 const filters = {
-	searchText: ''
+	searchText: '',
+	sortBy: ''
 }
 
 // Calls the non-filtered renderNotes function to display array of objects
@@ -47,7 +48,9 @@ document.querySelector('#for-fun').addEventListener('change', function(e){
 
 // FILTERS NOTES FOR SEARCH 
 document.querySelector('#filter-by').addEventListener('change', function(e){
-	console.log(e.target.value);
+	filters.sortBy = e.target.value;
+	console.log(filters.sortBy);
+	renderNotes(notes, filters)
 })
 
 // LIVE STORAGE
@@ -60,19 +63,3 @@ window.addEventListener('storage', function(e){
 		renderNotes(notes, filters);
 	}
 })
-
-// Create
-// localStorage.setItem('location', 'Cuba');
-// localStorage.setItem('Fuck', 'Fuck It')
-
-// Read
-// console.log(localStorage.getItem(location));
-
-// Update
-// localStorage.setItem('location', 'Guantanamo Bay, Cuba');
-
-// Delete
-// localStorage.removeItem('location');
-
-//localStorage.clear() //= deletes everything//
-// LocalStorage only stores strings - must convert array to string and back.

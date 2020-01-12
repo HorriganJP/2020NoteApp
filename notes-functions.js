@@ -18,16 +18,20 @@ const saveNotes = function (notes) {
 
 // CREATE NOTE
 const createNote = function(title, body) {
+    const timestamp = moment().valueOf();
     notes.push({
         id: uuidv4(),
         title: title,
-        body: body
+        body: body,
+        createdAt: timestamp,
+        updatedAt: timestamp
     },);
     return varID = (notes[notes.length - 1].id)
 }
 
 // FUNCTION RENDERS & FILTERS NOTES FROM ARRAY OF OBJECTS // LOCALSTORAGE
 const renderNotes = function (notes, filters) {
+    notes = sortNotes(notes, filters.sortBy);
 	const filteredNotes = notes.filter(function(note){
 		return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
 	})
@@ -37,6 +41,43 @@ const renderNotes = function (notes, filters) {
 	filteredNotes.forEach(function(note){
 		generateNoteDOM(note);
 	})
+}
+
+// SORT NOTES BY ALPHABETICAL, DATE CREATED, DATED UPDATED
+const sortNotes = function (notes, sortBy) {
+    if (sortBy === 'byEdited') {
+        return notes.sort(function(a, b){
+            if (a.updatedAt > b.updatedAt) {
+                return -1;
+            } else if (a.updatedAt < b.updatedAt) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+    } else if (sortBy === 'byCreated') {
+        return notes.sort(function(a,b){
+            if (a.createdAt > b.createdAt) {
+                return 1;
+            } else if (a.createdAt < b.createdAt){
+                return -1;
+            } else {
+                return 0;
+            }
+        })
+    } else if (sortBy === 'Alphabetically') {
+        return notes.sort(function(a,b){
+            if (a.title < b.title) {
+                return -1;
+            } else if (a.title > b.title) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+    } else {
+        return notes;
+    }
 }
 
 // GENERATES THE DOM STRUCTURE FOR A NOTE
